@@ -12,9 +12,8 @@ interface PageLayoutProps extends PropsWithChildren {
 
 const PageWrapper = styled.div({
   width: "100%",
-  maxWidth: "800px",
   minHeight: "100vh",
-  background: colors.background,
+  background: colors.greyOpacity50,
   backdropFilter: "blur(16px)",
 });
 
