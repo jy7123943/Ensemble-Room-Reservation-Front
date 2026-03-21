@@ -1,13 +1,14 @@
 import { Global, css } from "@emotion/react";
+import { colors } from "@toss/tds-colors";
 
 export function GlobalStyles() {
   return (
     <Global
       styles={css({
         ":root": {
-          color: "#1f2937",
+          color: colors.grey900,
           background:
-            "radial-gradient(circle at top, rgba(49, 130, 246, 0.16), transparent 28%), linear-gradient(180deg, #f3f7fb 0%, #eef3f8 100%)",
+            `radial-gradient(circle at top, rgba(49, 130, 246, 0.16), transparent 28%), linear-gradient(180deg, ${colors.grey50} 0%, ${colors.blue50} 100%)`,
           fontFamily:
             "'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
         },

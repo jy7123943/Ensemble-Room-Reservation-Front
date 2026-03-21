@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from '@toss/tds-colors';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 interface SectionCardProps extends PropsWithChildren {
@@ -10,7 +11,7 @@ const SectionCardContainer = styled.section({
   marginBottom: '16px',
   padding: '16px',
   borderRadius: '24px',
-  background: '#fff',
+  background: colors.background,
   boxShadow: '0 10px 30px rgba(15, 23, 42, 0.06)',
 });
 

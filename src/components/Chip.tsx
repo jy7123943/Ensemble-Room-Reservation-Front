@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from '@toss/tds-colors';
 import type { PropsWithChildren } from 'react';
 
 interface ChipProps extends PropsWithChildren {
@@ -12,8 +13,8 @@ const ChipPill = styled.span<{ active?: boolean }>(({ active }) => ({
   minHeight: '32px',
   padding: '6px 12px',
   borderRadius: '999px',
-  background: active ? '#dbeafe' : '#edf2f7',
-  color: active ? '#1d4ed8' : '#475569',
+  background: active ? colors.blue50 : colors.grey100,
+  color: active ? colors.blue500 : colors.grey700,
   fontSize: '13px',
   fontWeight: active ? 700 : 500,
 }));

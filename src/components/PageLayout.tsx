@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { colors } from "@toss/tds-colors";
 import type { PropsWithChildren, ReactNode } from "react";
-import { Asset, Top } from "@toss/tds-mobile";
+import { Top } from "@toss/tds-mobile";
 
 interface PageLayoutProps extends PropsWithChildren {
   title: string;
@@ -13,7 +14,7 @@ const PageWrapper = styled.div({
   width: "100%",
   maxWidth: "800px",
   minHeight: "100vh",
-  background: "#fff",
+  background: colors.background,
   backdropFilter: "blur(16px)",
 });
 
@@ -37,13 +38,6 @@ export function PageLayout({
       {topBar}
       <PageContent>
         <HeroBlock>
-          <Asset.Image
-            src="/guitar.png"
-            alt="Rehearsal Room Booking"
-            frameShape={{ width: 44, height: 44 }}
-            scaleType="fit"
-            style={{ marginBottom: 12 }}
-          />
           <Top
             upperGap={0}
             lowerGap={0}

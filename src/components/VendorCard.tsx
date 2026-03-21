@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from '@toss/tds-colors';
 import type { Vendor } from '../types';
 import { Chip } from './Chip';
 
@@ -12,7 +13,7 @@ const VendorButton = styled.button({
   gap: '12px',
   width: '100%',
   border: 0,
-  background: '#f8fafc',
+  background: colors.grey50,
   padding: 0,
   borderRadius: '20px',
   overflow: 'hidden',
@@ -39,7 +40,7 @@ const VendorHead = styled.div({
 
 const MutedParagraph = styled.p({
   margin: '4px 0',
-  color: '#64748b',
+  color: colors.grey600,
 });
 
 const ChipRow = styled.div({
