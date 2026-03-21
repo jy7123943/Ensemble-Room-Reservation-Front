@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import type { PropsWithChildren, ReactNode } from "react";
-import { Top } from "@toss/tds-mobile";
+import { Asset, Top } from "@toss/tds-mobile";
 
 interface PageLayoutProps extends PropsWithChildren {
   title: string;
@@ -25,15 +25,6 @@ const HeroBlock = styled.section({
   marginBottom: "20px",
 });
 
-const Eyebrow = styled.p({
-  margin: "0 0 8px",
-  fontSize: "12px",
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: "#2563eb",
-  fontWeight: 700,
-});
-
 export function PageLayout({
   title,
   subtitle,
@@ -46,7 +37,13 @@ export function PageLayout({
       {topBar}
       <PageContent>
         <HeroBlock>
-          <Eyebrow>Rehearsal Room Booking</Eyebrow>
+          <Asset.Image
+            src="/guitar.png"
+            alt="Rehearsal Room Booking"
+            frameShape={{ width: 44, height: 44 }}
+            scaleType="fit"
+            style={{ marginBottom: 12 }}
+          />
           <Top
             upperGap={0}
             lowerGap={0}
