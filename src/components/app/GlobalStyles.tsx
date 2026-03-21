@@ -7,8 +7,7 @@ export function GlobalStyles() {
       styles={css({
         ":root": {
           color: colors.grey900,
-          background:
-            `radial-gradient(circle at top, rgba(49, 130, 246, 0.16), transparent 28%), linear-gradient(180deg, ${colors.grey50} 0%, ${colors.blue50} 100%)`,
+          background: colors.white,
           fontFamily:
             "'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
         },
@@ -20,6 +19,7 @@ export function GlobalStyles() {
         },
         body: {
           margin: 0,
+          background: colors.white,
         },
         "button, textarea": {
           font: "inherit",
@@ -27,6 +27,7 @@ export function GlobalStyles() {
         "#root": {
           display: "flex",
           justifyContent: "center",
+          background: colors.white,
         },
       })}
     />

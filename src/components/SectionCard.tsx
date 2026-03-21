@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
-import { colors } from '@toss/tds-colors';
-import { ListHeader } from '@toss/tds-mobile';
-import type { PropsWithChildren, ReactNode } from 'react';
+import styled from "@emotion/styled";
+import { ListHeader } from "@toss/tds-mobile";
+import type { PropsWithChildren, ReactNode } from "react";
 
 interface SectionCardProps extends PropsWithChildren {
   title?: string;
@@ -9,18 +8,15 @@ interface SectionCardProps extends PropsWithChildren {
 }
 
 const SectionCardContainer = styled.section({
-  marginBottom: '16px',
-  padding: '16px',
-  borderRadius: '24px',
-  background: colors.background,
-  boxShadow: '0 10px 30px rgba(15, 23, 42, 0.06)',
+  marginBottom: "28px",
 });
 
 const SectionHeader = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: '12px',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: "14px",
+  padding: "0 20px",
 });
 
 export function SectionCard({ title, action, children }: SectionCardProps) {
