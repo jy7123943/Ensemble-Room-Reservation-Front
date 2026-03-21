@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, TextArea } from '@toss/tds-mobile';
+import { FixedBottomCTA, TextArea } from '@toss/tds-mobile';
 import { SectionCard } from '../../components/SectionCard';
 
 export function ReviewScreen() {
@@ -23,11 +23,7 @@ export function ReviewScreen() {
         />
       </SectionCard>
 
-      <StickyCta>
-        <Button size="xlarge" display="full">
-          리뷰 등록
-        </Button>
-      </StickyCta>
+      <FixedBottomCTA>리뷰 등록</FixedBottomCTA>
     </>
   );
 }
@@ -42,16 +38,4 @@ const StarButton = styled.button({
   background: 'transparent',
   fontSize: '28px',
   color: '#f59e0b',
-});
-
-const StickyCta = styled.div({
-  position: 'sticky',
-  bottom: '16px',
-  display: 'flex',
-  gap: '10px',
-  marginTop: '20px',
-  padding: '14px',
-  borderRadius: '22px',
-  background: 'rgba(255, 255, 255, 0.94)',
-  boxShadow: '0 10px 24px rgba(15, 23, 42, 0.08)',
 });

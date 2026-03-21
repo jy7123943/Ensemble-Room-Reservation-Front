@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { SegmentedControl } from '@toss/tds-mobile';
+import { Badge, SegmentedControl } from '@toss/tds-mobile';
 import type { Vendor } from '../../types';
-import { Chip } from '../../components/Chip';
 import { SectionCard } from '../../components/SectionCard';
 import { VendorCard } from '../../components/VendorCard';
 
@@ -22,9 +21,9 @@ export function SearchScreen({ vendors, onOpenVendor }: SearchScreenProps) {
           </SegmentedControl>
         </SegmentWrap>
         <ChipRow>
-          <Chip>가격</Chip>
-          <Chip>거리</Chip>
-          <Chip>평점</Chip>
+          <Badge size="small" variant="weak" color="elephant">가격</Badge>
+          <Badge size="small" variant="weak" color="elephant">거리</Badge>
+          <Badge size="small" variant="weak" color="elephant">평점</Badge>
         </ChipRow>
         <MapPlaceholder>지도 영역</MapPlaceholder>
       </SectionCard>
@@ -73,4 +72,5 @@ const Stack = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
+  padding: 0,
 });

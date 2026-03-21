@@ -52,4 +52,5 @@ const Stack = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
+  padding: 0,
 });

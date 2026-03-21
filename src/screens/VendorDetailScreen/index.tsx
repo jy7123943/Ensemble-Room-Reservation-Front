@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Badge, Button } from '@toss/tds-mobile';
+import { Badge, Button, ListRow } from '@toss/tds-mobile';
 import type { Room, Vendor } from '../../types';
 import { SectionCard } from '../../components/SectionCard';
 
@@ -39,16 +39,23 @@ export function VendorDetailScreen({
       <SectionCard title="룸 목록">
         <Stack>
           {rooms.map((room) => (
-            <RoomCard key={room.id}>
-              <div>
-                <strong>{room.name}</strong>
-                <MutedParagraph>{room.capacity}인</MutedParagraph>
-                <MutedParagraph>{room.price.toLocaleString('ko-KR')}원/시간</MutedParagraph>
-              </div>
-              <Button size="small" onClick={onOpenBooking}>
-                예약
-              </Button>
-            </RoomCard>
+            <ListRow
+              key={room.id}
+              border="none"
+              contents={
+                <ListRow.Texts
+                  type="3RowTypeA"
+                  top={room.name}
+                  middle={`${room.capacity}인`}
+                  bottom={`${room.price.toLocaleString('ko-KR')}원/시간`}
+                />
+              }
+              right={
+                <Button size="small" onClick={onOpenBooking}>
+                  예약
+                </Button>
+              }
+            />
           ))}
         </Stack>
       </SectionCard>
@@ -99,14 +106,5 @@ const Stack = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
-});
-
-const RoomCard = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: '12px',
-  padding: '14px',
-  borderRadius: '18px',
-  background: '#f8fafc',
+  padding: 0,
 });
