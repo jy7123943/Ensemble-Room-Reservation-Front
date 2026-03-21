@@ -27,15 +27,15 @@ const BottomTabNav = styled.nav({
   display: "grid",
   gridTemplateColumns: "repeat(4, 1fr)",
   gap: "8px",
-  padding: "14px 16px 20px",
+  padding: "6px 16px 10px",
   background: "rgba(255, 255, 255, 0.96)",
   borderTop: `1px solid ${colors.grey200}`,
 });
 
 const TabButton = styled.button<{ active: boolean }>(({ active }) => ({
   border: 0,
-  background: active ? colors.blue50 : "transparent",
-  color: active ? colors.blue500 : colors.grey600,
+  backgroundColor: "transparent",
+  color: active ? colors.blue500 : colors.grey500,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -43,7 +43,16 @@ const TabButton = styled.button<{ active: boolean }>(({ active }) => ({
   gap: "6px",
   padding: "10px 0 8px",
   borderRadius: "14px",
-  fontWeight: active ? 700 : 500,
+  fontWeight: active ? "bold" : 400,
+  ":focus": {
+    outline: "1px solid transparent",
+  },
+  WebkitTapHighlightColor: "transparent",
+  transition: "transform 0.15s ease",
+  ":active": {
+    transform: "scale(0.92)",
+    backgroundColor: active ? colors.greyOpacity50 : "transparent",
+  },
 }));
 
 const TabLabel = styled.span({
