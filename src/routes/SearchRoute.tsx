@@ -8,7 +8,7 @@ export default function SearchRoute() {
   return (
     <SearchScreen
       vendors={vendors}
-      onOpenVendor={() => navigate(`/vendors/${vendors[0].id}`)}
+      onOpenVendor={(vendorId) => navigate(`/vendors/${vendorId}`)}
     />
   );
 }

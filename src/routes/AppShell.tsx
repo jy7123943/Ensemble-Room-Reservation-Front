@@ -21,8 +21,8 @@ const routeMeta: Array<{
   },
   {
     pattern: "/search",
-    title: "검색 결과",
-    subtitle: "조건에 맞는 합주실을 비교해보세요.",
+    title: "지도에서 찾기",
+    subtitle: "핀을 눌러 위치를 보고, 가까운 순으로 바로 비교해보세요.",
     tab: "home",
   },
   {
@@ -135,11 +135,3 @@ export function AppShell() {
     </PageLayout>
   );
 }
-
-const SearchBarButton = styled.button({
-  padding: 0,
-  border: 0,
-  width: "100%",
-  background: "transparent",
-  textAlign: "left",
-});
