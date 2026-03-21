@@ -5,8 +5,8 @@ import { SectionCard } from '../../components/SectionCard';
 
 interface ReservationsScreenProps {
   reservations: Reservation[];
-  onOpenDetail: () => void;
-  onOpenReview: () => void;
+  onOpenDetail: (reservationId: string) => void;
+  onOpenReview: (reservationId: string) => void;
 }
 
 export function ReservationsScreen({
@@ -30,7 +30,18 @@ export function ReservationsScreen({
               key={item.id}
               border="none"
               withTouchEffect
-              onClick={item.status === 'completed' ? onOpenReview : onOpenDetail}
+              onClick={() =>
+                item.status === 'completed'
+                  ? onOpenReview(item.id)
+                  : onOpenDetail(item.id)
+              }
+              left={
+                <ListRow.AssetImage
+                  src={item.imageUrl}
+                  shape="square"
+                  size="medium"
+                />
+              }
               contents={
                 <ListRow.Texts
                   type="3RowTypeA"
@@ -41,11 +52,15 @@ export function ReservationsScreen({
               }
               right={
                 item.status === 'completed' ? (
-                  <Button size="small" variant="weak" onClick={onOpenReview}>
+                  <Button
+                    size="small"
+                    variant="weak"
+                    onClick={() => onOpenReview(item.id)}
+                  >
                     리뷰 작성
                   </Button>
                 ) : (
-                  <Button size="small" onClick={onOpenDetail}>
+                  <Button size="small" onClick={() => onOpenDetail(item.id)}>
                     상세보기
                   </Button>
                 )

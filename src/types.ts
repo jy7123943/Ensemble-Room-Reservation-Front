@@ -23,8 +23,10 @@ export interface Room {
 
 export interface Reservation {
   id: string;
+  vendorId: string;
   status: 'confirmed' | 'completed' | 'cancelled';
   vendorName: string;
+  imageUrl: string;
   roomName: string;
   dateLabel: string;
   timeLabel: string;

@@ -8,8 +8,8 @@ export default function ReservationsRoute() {
   return (
     <ReservationsScreen
       reservations={reservations}
-      onOpenDetail={() => navigate(`/reservations/${reservations[0].id}`)}
-      onOpenReview={() => navigate(`/reservations/${reservations[1].id}/review`)}
+      onOpenDetail={(reservationId) => navigate(`/reservations/${reservationId}`)}
+      onOpenReview={(reservationId) => navigate(`/reservations/${reservationId}/review`)}
     />
   );
 }

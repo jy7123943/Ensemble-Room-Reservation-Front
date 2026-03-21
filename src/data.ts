@@ -49,8 +49,11 @@ export const rooms: Room[] = [
 export const reservations: Reservation[] = [
   {
     id: 'R-20260315-A7K2',
+    vendorId: 'sound-box',
     status: 'confirmed',
     vendorName: '사운드박스 합주실',
+    imageUrl:
+      'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80',
     roomName: 'A룸',
     dateLabel: '2026.03.15',
     timeLabel: '12:00 - 14:00',
@@ -58,8 +61,11 @@ export const reservations: Reservation[] = [
   },
   {
     id: 'R-20260302-K9D1',
+    vendorId: 'band-lab',
     status: 'completed',
     vendorName: '밴드랩 스튜디오',
+    imageUrl:
+      'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=800&q=80',
     roomName: 'B룸',
     dateLabel: '2026.03.02',
     timeLabel: '18:00 - 20:00',

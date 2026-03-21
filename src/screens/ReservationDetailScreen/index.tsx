@@ -15,6 +15,7 @@ export function ReservationDetailScreen({
   return (
     <>
       <SectionCard>
+        <HeroImage src={reservation.imageUrl} alt={reservation.vendorName} />
         <StatusPillWrap>
           <Badge size="medium" variant="weak" color="blue">
             {reservation.status === 'confirmed' ? '예약 확정' : '이용 완료'}
@@ -59,6 +60,15 @@ export function ReservationDetailScreen({
 
 const StatusPillWrap = styled.div({
   marginBottom: '14px',
+});
+
+const HeroImage = styled.img({
+  display: 'block',
+  width: '100%',
+  height: '180px',
+  marginBottom: '16px',
+  borderRadius: '24px',
+  objectFit: 'cover',
 });
 
 const PlainList = styled.ul({
