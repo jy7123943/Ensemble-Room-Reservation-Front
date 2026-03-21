@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMusic } from "@fortawesome/free-solid-svg-icons";
 import { colors } from "@toss/tds-colors";
 import type { PropsWithChildren, ReactNode } from "react";
 import { ListHeader } from "@toss/tds-mobile";
@@ -37,16 +35,14 @@ export function PageLayout({
           <HeaderRow>
             <HeaderTextGroup>
               <HeaderTitle typography="t4" fontWeight="bold">
-                <HeaderTitleText>{title}</HeaderTitleText>
+                {title}
               </HeaderTitle>
               {subtitle ? (
-                <HeaderDescription>
-                  <HeaderDescriptionText>{subtitle}</HeaderDescriptionText>
-                </HeaderDescription>
+                <HeaderDescription>{subtitle}</HeaderDescription>
               ) : null}
             </HeaderTextGroup>
             <ProfilePill>
-              <ProfileIcon icon={faMusic} />
+              <ProfileImage src="/guitar.png" alt="Rehearsal Room Booking" />
             </ProfilePill>
           </HeaderRow>
         </HeaderContent>
@@ -58,15 +54,15 @@ export function PageLayout({
 }
 
 const HeaderContent = styled.header({
-  padding: "20px 20px 18px",
+  padding: "24px 20px 20px",
 });
 
 const HeaderRow = styled.div({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  gap: "8px",
-  paddingBottom: "16px",
+  gap: "12px",
+  paddingBottom: "12px",
 });
 
 const HeaderTextGroup = styled.div({
@@ -89,12 +85,18 @@ const HeaderTitleText = styled.span({
   display: "block",
   width: "100%",
   textAlign: "left",
+  fontSize: "20px",
+  lineHeight: 1.3,
 });
 
 const HeaderDescriptionText = styled.span({
   display: "block",
   width: "100%",
   textAlign: "left",
+  marginTop: "4px",
+  fontSize: "14px",
+  lineHeight: 1.5,
+  color: colors.grey700,
 });
 
 const ProfilePill = styled.div({
@@ -108,6 +110,8 @@ const ProfilePill = styled.div({
   flexShrink: 0,
 });
 
-const ProfileIcon = styled(FontAwesomeIcon)({
-  fontSize: "22px",
+const ProfileImage = styled.img({
+  width: "34px",
+  height: "34px",
+  objectFit: "contain",
 });

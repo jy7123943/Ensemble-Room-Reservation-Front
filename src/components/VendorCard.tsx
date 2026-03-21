@@ -1,28 +1,28 @@
-import styled from '@emotion/styled';
-import { colors } from '@toss/tds-colors';
-import { ListRow } from '@toss/tds-mobile';
-import type { Vendor } from '../types';
-import { Chip } from './Chip';
+import styled from "@emotion/styled";
+import { colors } from "@toss/tds-colors";
+import { ListRow } from "@toss/tds-mobile";
+import type { Vendor } from "../types";
+import { Chip } from "./Chip";
 
 interface VendorCardProps {
   vendor: Vendor;
   onClick?: () => void;
-  variant?: 'default' | 'featured';
+  variant?: "default" | "featured";
 }
 
 const ChipRow = styled.div({
-  display: 'flex',
-  gap: '8px',
-  flexWrap: 'wrap',
-  marginTop: '12px',
+  display: "flex",
+  gap: "6px",
+  flexWrap: "wrap",
+  marginTop: "6px",
 });
 
 export function VendorCard({
   vendor,
   onClick,
-  variant = 'default',
+  variant = "default",
 }: VendorCardProps) {
-  if (variant === 'featured') {
+  if (variant === "featured") {
     return (
       <FeaturedCard type="button" onClick={onClick}>
         <FeaturedImage src={vendor.imageUrl} alt={vendor.name} />
@@ -48,7 +48,7 @@ export function VendorCard({
     <ListRow
       border="none"
       withTouchEffect
-      arrowType={onClick ? 'right' : undefined}
+      arrowType={onClick ? "right" : undefined}
       onClick={onClick}
       left={
         <ListRow.AssetImage
@@ -77,41 +77,41 @@ export function VendorCard({
 }
 
 const FeaturedCard = styled.button({
-  width: '100%',
+  width: "100%",
   padding: 0,
   border: 0,
-  background: 'transparent',
-  textAlign: 'left',
+  background: "transparent",
+  textAlign: "left",
 });
 
 const FeaturedImage = styled.img({
-  display: 'block',
-  width: '100%',
-  height: '200px',
-  objectFit: 'cover',
-  borderRadius: '28px',
+  display: "block",
+  width: "100%",
+  height: "200px",
+  objectFit: "cover",
+  borderRadius: "16px",
 });
 
 const FeaturedBody = styled.div({
-  paddingTop: '14px',
+  padding: "10px 4px 0px",
 });
 
 const FeaturedTopLine = styled.div({
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-  gap: '12px',
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  gap: "8px",
 });
 
 const FeaturedName = styled.strong({
   color: colors.grey900,
-  fontSize: '20px',
-  lineHeight: 1.35,
+  fontSize: "18px",
+  lineHeight: 1.3,
 });
 
 const FeaturedMeta = styled.p({
-  margin: '8px 0 0',
+  margin: "6px 0 0",
   color: colors.grey600,
-  fontSize: '14px',
-  lineHeight: 1.5,
+  fontSize: "14px",
+  lineHeight: 1.4,
 });
