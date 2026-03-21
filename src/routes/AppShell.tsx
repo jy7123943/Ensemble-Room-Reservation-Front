@@ -1,0 +1,116 @@
+import { Suspense } from 'react';
+import { matchPath, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { BottomTabBar } from '../components/BottomTabBar';
+import { PageLayout } from '../components/PageLayout';
+import type { TabKey } from '../types';
+
+const routeMeta: Array<{
+  pattern: string;
+  title: string;
+  subtitle: string;
+  tab: TabKey;
+}> = [
+  {
+    pattern: '/',
+    title: '어디서 합주할까요?',
+    subtitle: '근처 합주실을 빠르게 찾아보세요.',
+    tab: 'home',
+  },
+  {
+    pattern: '/search',
+    title: '검색 결과',
+    subtitle: '조건에 맞는 합주실을 비교해보세요.',
+    tab: 'home',
+  },
+  {
+    pattern: '/vendors/:vendorId',
+    title: '업체 상세',
+    subtitle: '업체 정보와 룸 구성을 확인하세요.',
+    tab: 'home',
+  },
+  {
+    pattern: '/vendors/:vendorId/rooms/:roomId/book',
+    title: '룸 예약',
+    subtitle: '날짜와 시간을 골라 예약을 진행하세요.',
+    tab: 'home',
+  },
+  {
+    pattern: '/vendors/:vendorId/rooms/:roomId/confirm',
+    title: '예약 확인',
+    subtitle: '결제 전 정보를 한 번 더 확인하세요.',
+    tab: 'home',
+  },
+  {
+    pattern: '/reservations/complete',
+    title: '예약 완료',
+    subtitle: '예약이 정상적으로 접수되었어요.',
+    tab: 'reservations',
+  },
+  {
+    pattern: '/reservations',
+    title: '예약 내역',
+    subtitle: '예정, 완료, 취소 예약을 관리하세요.',
+    tab: 'reservations',
+  },
+  {
+    pattern: '/reservations/:reservationId/review',
+    title: '리뷰 작성',
+    subtitle: '이용 경험을 남겨 다른 사용자에게 도움을 주세요.',
+    tab: 'reservations',
+  },
+  {
+    pattern: '/reservations/:reservationId',
+    title: '예약 상세',
+    subtitle: '예약 정보와 후속 액션을 확인하세요.',
+    tab: 'reservations',
+  },
+  {
+    pattern: '/favorites',
+    title: '찜 목록',
+    subtitle: '저장한 업체를 다시 둘러보세요.',
+    tab: 'favorites',
+  },
+  {
+    pattern: '/mypage',
+    title: '마이페이지',
+    subtitle: '개인 설정과 내 정보를 관리하세요.',
+    tab: 'mypage',
+  },
+];
+
+const fallbackMeta = routeMeta[0];
+
+export function AppShell() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const activeMeta =
+    routeMeta.find((item) =>
+      matchPath(
+        {
+          path: item.pattern,
+          end: item.pattern === '/' || item.pattern === '/search' || item.pattern === '/reservations' || item.pattern === '/favorites' || item.pattern === '/mypage',
+        },
+        location.pathname,
+      ),
+    ) ?? fallbackMeta;
+
+  const handleTabSelect = (tab: TabKey) => {
+    if (tab === 'home') navigate('/');
+    if (tab === 'reservations') navigate('/reservations');
+    if (tab === 'favorites') navigate('/favorites');
+    if (tab === 'mypage') navigate('/mypage');
+  };
+
+  return (
+    <PageLayout
+      title={activeMeta.title}
+      subtitle={activeMeta.subtitle}
+      footer={<BottomTabBar activeTab={activeMeta.tab} onSelect={handleTabSelect} />}
+    >
+      <Suspense fallback={<div className="route-loading">화면을 불러오는 중...</div>}>
+        <Outlet />
+      </Suspense>
+    </PageLayout>
+  );
+}
