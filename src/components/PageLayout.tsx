@@ -11,6 +11,8 @@ interface PageLayoutProps extends PropsWithChildren {
 }
 
 const PageWrapper = styled.div({
+  display: "flex",
+  flexDirection: "column",
   width: "100%",
   minHeight: "100vh",
   background: colors.greyOpacity50,
@@ -18,6 +20,7 @@ const PageWrapper = styled.div({
 });
 
 const PageContent = styled.main({
+  flex: 1,
   padding: "16px 20px 110px",
 });
 
