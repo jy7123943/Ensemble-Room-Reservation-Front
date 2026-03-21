@@ -1,6 +1,7 @@
-import type { Vendor } from '../types';
-import { SectionCard } from '../components/SectionCard';
-import { VendorCard } from '../components/VendorCard';
+import styled from '@emotion/styled';
+import type { Vendor } from '../../types';
+import { SectionCard } from '../../components/SectionCard';
+import { VendorCard } from '../../components/VendorCard';
 
 interface FavoritesScreenProps {
   vendors: Vendor[];
@@ -10,11 +11,17 @@ interface FavoritesScreenProps {
 export function FavoritesScreen({ vendors, onOpenVendor }: FavoritesScreenProps) {
   return (
     <SectionCard title="찜한 업체">
-      <div className="stack">
+      <Stack>
         {vendors.map((vendor) => (
           <VendorCard key={vendor.id} vendor={vendor} onClick={onOpenVendor} />
         ))}
-      </div>
+      </Stack>
     </SectionCard>
   );
 }
+
+const Stack = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '12px',
+});

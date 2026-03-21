@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { Suspense } from 'react';
 import { matchPath, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { BottomTabBar } from '../components/BottomTabBar';
@@ -80,6 +81,11 @@ const routeMeta: Array<{
 
 const fallbackMeta = routeMeta[0];
 
+const RouteLoading = styled.div({
+  padding: '24px 0',
+  color: '#64748b',
+});
+
 export function AppShell() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -108,7 +114,7 @@ export function AppShell() {
       subtitle={activeMeta.subtitle}
       footer={<BottomTabBar activeTab={activeMeta.tab} onSelect={handleTabSelect} />}
     >
-      <Suspense fallback={<div className="route-loading">화면을 불러오는 중...</div>}>
+      <Suspense fallback={<RouteLoading>화면을 불러오는 중...</RouteLoading>}>
         <Outlet />
       </Suspense>
     </PageLayout>
