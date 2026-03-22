@@ -50,4 +50,5 @@ export interface Reservation {
   durationHours?: number;
   totalPrice?: number;
   userMemo?: string;
+  hasReview?: boolean;
 }

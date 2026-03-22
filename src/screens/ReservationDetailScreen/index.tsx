@@ -46,9 +46,15 @@ export function ReservationDetailScreen({
         }
         rightButton={
           reservation.status === 'completed' ? (
-            <Button size="large" onClick={onWriteReview}>
-              리뷰 작성
-            </Button>
+            reservation.hasReview ? (
+              <Button size="large" disabled>
+                리뷰 완료
+              </Button>
+            ) : (
+              <Button size="large" onClick={onWriteReview}>
+                리뷰 작성
+              </Button>
+            )
           ) : reservation.status === 'confirmed' ? (
             <Button size="large" onClick={onCancel}>
               예약 취소

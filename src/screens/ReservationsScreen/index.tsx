@@ -76,16 +76,22 @@ export function ReservationsScreen({
                 }
                 right={
                   item.status === 'completed' ? (
-                    <Button
-                      size="small"
-                      variant="weak"
-                      onClick={(e: React.MouseEvent) => {
-                        e.stopPropagation();
-                        onOpenReview(item.id);
-                      }}
-                    >
-                      리뷰 작성
-                    </Button>
+                    item.hasReview ? (
+                      <Button size="small" variant="weak" disabled>
+                        리뷰 완료
+                      </Button>
+                    ) : (
+                      <Button
+                        size="small"
+                        variant="weak"
+                        onClick={(e: React.MouseEvent) => {
+                          e.stopPropagation();
+                          onOpenReview(item.id);
+                        }}
+                      >
+                        리뷰 작성
+                      </Button>
+                    )
                   ) : (
                     <Button size="small" onClick={() => onOpenDetail(item.id)}>
                       상세보기
