@@ -16,7 +16,11 @@ export function VendorDetailScreen({
 }: VendorDetailScreenProps) {
   return (
     <>
-      <HeroImage src={vendor.imageUrl} alt={vendor.name} />
+      {vendor.imageUrl ? (
+        <HeroImage src={vendor.imageUrl} alt={vendor.name} />
+      ) : (
+        <HeroPlaceholder>🎵</HeroPlaceholder>
+      )}
       <SectionCard>
         <VendorTitleRow>
           <div>
@@ -37,27 +41,31 @@ export function VendorDetailScreen({
       </SectionCard>
 
       <SectionCard title="룸 목록">
-        <Stack>
-          {rooms.map((room) => (
-            <ListRow
-              key={room.id}
-              border="none"
-              contents={
-                <ListRow.Texts
-                  type="3RowTypeA"
-                  top={room.name}
-                  middle={`${room.capacity}인`}
-                  bottom={`${room.price.toLocaleString('ko-KR')}원/시간`}
-                />
-              }
-              right={
-                <Button size="small" onClick={() => onOpenBooking(room.id)}>
-                  예약
-                </Button>
-              }
-            />
-          ))}
-        </Stack>
+        {rooms.length === 0 ? (
+          <EmptyRooms>등록된 룸이 없습니다</EmptyRooms>
+        ) : (
+          <Stack>
+            {rooms.map((room) => (
+              <ListRow
+                key={room.id}
+                border="none"
+                contents={
+                  <ListRow.Texts
+                    type="3RowTypeA"
+                    top={room.name}
+                    middle={`${room.capacity}인`}
+                    bottom={`${room.price.toLocaleString('ko-KR')}원/시간`}
+                  />
+                }
+                right={
+                  <Button size="small" onClick={() => onOpenBooking(room.id)}>
+                    예약
+                  </Button>
+                }
+              />
+            ))}
+          </Stack>
+        )}
       </SectionCard>
     </>
   );
@@ -68,6 +76,16 @@ const HeroImage = styled.img({
   width: '100%',
   height: '220px',
   objectFit: 'cover',
+});
+
+const HeroPlaceholder = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '220px',
+  background: '#f1f5f9',
+  fontSize: '48px',
 });
 
 const VendorTitleRow = styled.div({
@@ -107,4 +125,11 @@ const Stack = styled.div({
   flexDirection: 'column',
   gap: '12px',
   padding: 0,
+});
+
+const EmptyRooms = styled.p({
+  padding: '40px 20px',
+  textAlign: 'center',
+  color: '#94a3b8',
+  fontSize: '15px',
 });

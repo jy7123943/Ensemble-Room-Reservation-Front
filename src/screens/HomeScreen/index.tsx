@@ -7,7 +7,7 @@ import { VendorCard } from "../../components/VendorCard";
 
 interface HomeScreenProps {
   vendors: Vendor[];
-  onOpenVendor: () => void;
+  onOpenVendor: (vendorId: string) => void;
   onOpenSearch: () => void;
 }
 
@@ -24,16 +24,24 @@ export function HomeScreen({
           <SearchPlaceholder>내게 맞는 합주실 찾기</SearchPlaceholder>
         </SearchBar>
       </SearchBarSticky>
-      <Stack>
-        {vendors.map((vendor) => (
-          <VendorCard
-            key={vendor.id}
-            vendor={vendor}
-            onClick={onOpenVendor}
-            variant="featured"
-          />
-        ))}
-      </Stack>
+      {vendors.length === 0 ? (
+        <EmptyState>
+          <EmptyIcon>🎸</EmptyIcon>
+          <EmptyText>등록된 합주실이 없습니다</EmptyText>
+          <EmptySubText>곧 새로운 합주실이 등록될 예정이에요</EmptySubText>
+        </EmptyState>
+      ) : (
+        <Stack>
+          {vendors.map((vendor) => (
+            <VendorCard
+              key={vendor.id}
+              vendor={vendor}
+              onClick={() => onOpenVendor(vendor.id)}
+              variant="featured"
+            />
+          ))}
+        </Stack>
+      )}
     </Content>
   );
 }
@@ -79,4 +87,31 @@ const Stack = styled.div({
   flexDirection: "column",
   gap: "20px",
   padding: 0,
+});
+
+const EmptyState = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "60px 20px",
+  textAlign: "center",
+});
+
+const EmptyIcon = styled.span({
+  fontSize: "48px",
+  marginBottom: "16px",
+});
+
+const EmptyText = styled.p({
+  margin: 0,
+  fontSize: "17px",
+  fontWeight: 700,
+  color: colors.grey900,
+});
+
+const EmptySubText = styled.p({
+  margin: "8px 0 0",
+  fontSize: "14px",
+  color: colors.grey500,
 });

@@ -25,9 +25,7 @@ export default function HomeRoute() {
   return (
     <HomeScreen
       vendors={vendors}
-      onOpenVendor={() => {
-        if (vendors.length > 0) navigate(`/vendors/${vendors[0].id}`);
-      }}
+      onOpenVendor={(vendorId: string) => navigate(`/vendors/${vendorId}`)}
       onOpenSearch={() => navigate('/search')}
     />
   );
