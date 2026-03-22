@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { fetchUserReservations, cancelReservation } from '../api/reservations';
-import { reservations as mockReservations } from '../data';
+import { fetchReservation, cancelReservation } from '../api/reservations';
 import { ReservationDetailScreen } from '../screens/ReservationDetailScreen';
 import type { Reservation } from '../types';
-
-// TODO: 토스 로그인 연동 후 실제 사용자 ID로 교체
-const TEMP_USER_ID = 'REPLACE_WITH_REAL_USER_ID';
 
 export default function ReservationDetailRoute() {
   const navigate = useNavigate();
@@ -15,15 +11,10 @@ export default function ReservationDetailRoute() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchUserReservations(TEMP_USER_ID)
-      .then((list) => {
-        const found = list.find((item) => item.id === reservationId);
-        setReservation(found ?? null);
-      })
-      .catch(() => {
-        const found = mockReservations.find((item) => item.id === reservationId);
-        setReservation(found ?? null);
-      })
+    if (!reservationId) return;
+    fetchReservation(reservationId)
+      .then(setReservation)
+      .catch(() => setReservation(null))
       .finally(() => setLoading(false));
   }, [reservationId]);
 
