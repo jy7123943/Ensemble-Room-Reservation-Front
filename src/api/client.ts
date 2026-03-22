@@ -5,6 +5,9 @@ export async function apiFetch<T>(path: string, options?: RequestInit): Promise<
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     ...options,
   });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}: 서버 요청에 실패했습니다`);
+  }
   const json = await res.json();
   if (!json.success) throw new Error(json.message || '요청에 실패했습니다');
   return json.data;

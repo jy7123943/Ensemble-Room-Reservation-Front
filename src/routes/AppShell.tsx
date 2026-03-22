@@ -15,7 +15,8 @@ const routeMeta: Array<{
 }> = [
   {
     pattern: "/",
-    title: "안녕하세요, 주연님",
+    // TODO: 토스 로그인 연동 후 사용자 이름 표시
+    title: "안녕하세요",
     subtitle: "내 위치에서 가까운 순으로 합주실을 보여드릴게요.",
     tab: "home",
   },
