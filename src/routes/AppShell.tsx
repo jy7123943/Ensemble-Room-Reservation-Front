@@ -79,6 +79,12 @@ const routeMeta: Array<{
     subtitle: "개인 설정과 내 정보를 관리하세요.",
     tab: "mypage",
   },
+  {
+    pattern: "/admin",
+    title: "관리자",
+    subtitle: "업체 승인 및 시스템 관리",
+    tab: "mypage",
+  },
 ];
 
 const fallbackMeta = routeMeta[0];
@@ -102,7 +108,8 @@ export function AppShell() {
             item.pattern === "/search" ||
             item.pattern === "/reservations" ||
             item.pattern === "/favorites" ||
-            item.pattern === "/mypage",
+            item.pattern === "/mypage" ||
+            item.pattern === "/admin",
         },
         location.pathname
       )
