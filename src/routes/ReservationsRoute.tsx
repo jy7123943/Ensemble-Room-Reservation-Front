@@ -26,7 +26,12 @@ export default function ReservationsRoute() {
     <ReservationsScreen
       reservations={reservations}
       onOpenDetail={(reservationId) => navigate(`/reservations/${reservationId}`)}
-      onOpenReview={(reservationId) => navigate(`/reservations/${reservationId}/review`)}
+      onOpenReview={(reservationId) => {
+        const reservation = reservations.find((r) => r.id === reservationId);
+        navigate(`/reservations/${reservationId}/review`, {
+          state: { vendorId: reservation?.vendorId, reservationId },
+        });
+      }}
     />
   );
 }

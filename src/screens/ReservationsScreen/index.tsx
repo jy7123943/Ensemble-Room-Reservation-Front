@@ -16,7 +16,7 @@ interface ReservationsScreenProps {
 function filterReservations(reservations: Reservation[], tab: TabValue): Reservation[] {
   switch (tab) {
     case 'upcoming':
-      return reservations.filter((r) => r.status === 'confirmed');
+      return reservations.filter((r) => r.status === 'pending' || r.status === 'confirmed');
     case 'done':
       return reservations.filter((r) => r.status === 'completed');
     case 'cancelled':
@@ -58,11 +58,7 @@ export function ReservationsScreen({
                 key={item.id}
                 border="none"
                 withTouchEffect
-                onClick={() =>
-                  item.status === 'completed'
-                    ? onOpenReview(item.id)
-                    : onOpenDetail(item.id)
-                }
+                onClick={() => onOpenDetail(item.id)}
                 left={
                   <ListRow.AssetImage
                     src={item.imageUrl}
@@ -83,7 +79,10 @@ export function ReservationsScreen({
                     <Button
                       size="small"
                       variant="weak"
-                      onClick={() => onOpenReview(item.id)}
+                      onClick={(e: React.MouseEvent) => {
+                        e.stopPropagation();
+                        onOpenReview(item.id);
+                      }}
                     >
                       리뷰 작성
                     </Button>

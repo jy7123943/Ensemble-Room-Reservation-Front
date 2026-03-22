@@ -22,8 +22,7 @@ export default function ReviewRoute() {
       );
       alert('리뷰가 등록되었습니다');
     } catch {
-      // API 실패해도 사용자에게 알림
-      alert('리뷰가 등록되었습니다');
+      alert('리뷰 등록에 실패했습니다. 다시 시도해주세요.');
     }
     navigate('/reservations');
   };

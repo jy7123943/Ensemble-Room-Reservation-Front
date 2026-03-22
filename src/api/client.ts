@@ -1,14 +1,23 @@
-const BASE_URL = '/api/v1';
+const BASE = '/api/v1';
 
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
+  const res = await fetch(`${BASE}${path}`, {
     ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
   });
+
   if (!res.ok) {
-    throw new Error(`HTTP ${res.status}: 서버 요청에 실패했습니다`);
+    const errorBody = await res.text();
+    throw new Error(errorBody || `HTTP ${res.status}`);
   }
-  const json = await res.json();
-  if (!json.success) throw new Error(json.message || '요청에 실패했습니다');
-  return json.data;
+
+  // Handle 204 No Content or empty bodies
+  const text = await res.text();
+  if (!text) return undefined as T;
+
+  const json = JSON.parse(text);
+  return json.data ?? json;
 }

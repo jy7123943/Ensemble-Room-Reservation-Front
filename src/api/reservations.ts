@@ -32,8 +32,9 @@ interface PaginatedResponse<T> {
 
 function statusToFrontend(status: string): Reservation['status'] {
   switch (status) {
-    case 'CONFIRMED':
     case 'PENDING':
+      return 'pending';
+    case 'CONFIRMED':
       return 'confirmed';
     case 'COMPLETED':
       return 'completed';

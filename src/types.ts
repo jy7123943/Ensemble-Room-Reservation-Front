@@ -36,7 +36,7 @@ export interface Reservation {
   reservationNumber?: string;
   vendorId: string;
   roomId?: string;
-  status: 'confirmed' | 'completed' | 'cancelled';
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   vendorName: string;
   imageUrl: string;
   roomName: string;
