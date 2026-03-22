@@ -16,7 +16,7 @@ interface ApiVendor {
   created_at: string;
   rating?: number;
   review_count?: number;
-  image_url?: string;
+  thumbnail_url?: string;
 }
 
 interface ApiRoom {
@@ -57,7 +57,7 @@ function toVendor(api: ApiVendor): Vendor {
     address: api.address,
     priceLabel: '',
     amenities: api.amenities ?? [],
-    imageUrl: api.image_url ?? '',
+    imageUrl: api.thumbnail_url ?? '',
     operatingHours: api.operating_hours ? Object.values(api.operating_hours).join(', ') : undefined,
   };
 }
