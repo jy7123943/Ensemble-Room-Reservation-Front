@@ -31,7 +31,9 @@ export function VendorDetailScreen({
             <PageSectionTitle>{vendor.name}</PageSectionTitle>
             <MutedParagraph>★ {vendor.rating} ({vendor.reviewCount})</MutedParagraph>
             <MutedParagraph>{vendor.address}</MutedParagraph>
-            {vendor.operatingHours && <MutedParagraph>{vendor.operatingHours}</MutedParagraph>}
+            {vendor.operatingHours && (
+              <MutedParagraph style={{ whiteSpace: 'pre-line' }}>{vendor.operatingHours}</MutedParagraph>
+            )}
           </div>
           <GhostIconButton type="button" onClick={onToggleFavorite}>
             {isFavorite ? '♥' : '♡'}
