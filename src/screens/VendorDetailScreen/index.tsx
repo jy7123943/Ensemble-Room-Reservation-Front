@@ -29,7 +29,7 @@ export function VendorDetailScreen({
         <VendorTitleRow>
           <div>
             <PageSectionTitle>{vendor.name}</PageSectionTitle>
-            <MutedParagraph>★ {vendor.rating} ({vendor.reviewCount})</MutedParagraph>
+            <MutedParagraph>{vendor.rating > 0 ? `★ ${vendor.rating} (${vendor.reviewCount})` : '리뷰 없음'}</MutedParagraph>
             <MutedParagraph>{vendor.address}</MutedParagraph>
             {vendor.operatingHours && (
               <MutedParagraph style={{ whiteSpace: 'pre-line' }}>{vendor.operatingHours}</MutedParagraph>

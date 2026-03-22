@@ -17,6 +17,11 @@ const ChipRow = styled.div({
   marginTop: "6px",
 });
 
+function ratingLabel(vendor: Vendor): string {
+  if (vendor.rating > 0) return `★ ${vendor.rating} (${vendor.reviewCount})`;
+  return "리뷰 없음";
+}
+
 export function VendorCard({
   vendor,
   onClick,
@@ -32,7 +37,7 @@ export function VendorCard({
             <Chip>{vendor.distance}</Chip>
           </FeaturedTopLine>
           <FeaturedMeta>
-            ★ {vendor.rating} ({vendor.reviewCount}) · {vendor.priceLabel}
+            {ratingLabel(vendor)}{vendor.priceLabel ? ` · ${vendor.priceLabel}` : ''}
           </FeaturedMeta>
           <ChipRow>
             {vendor.amenities.slice(0, 3).map((item) => (
@@ -61,7 +66,7 @@ export function VendorCard({
         <ListRow.Texts
           type="3RowTypeA"
           top={vendor.name}
-          middle={`${vendor.distance} · ★ ${vendor.rating}`}
+          middle={vendor.distance ? `${vendor.distance} · ${ratingLabel(vendor)}` : ratingLabel(vendor)}
           bottom={
             <ChipRow>
               <Chip>{vendor.priceLabel}</Chip>
