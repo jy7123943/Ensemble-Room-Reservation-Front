@@ -7,12 +7,16 @@ interface VendorDetailScreenProps {
   vendor: Vendor;
   rooms: Room[];
   onOpenBooking: (roomId: string) => void;
+  isFavorite: boolean;
+  onToggleFavorite: () => void;
 }
 
 export function VendorDetailScreen({
   vendor,
   rooms,
   onOpenBooking,
+  isFavorite,
+  onToggleFavorite,
 }: VendorDetailScreenProps) {
   return (
     <>
@@ -29,7 +33,9 @@ export function VendorDetailScreen({
             <MutedParagraph>{vendor.address}</MutedParagraph>
             {vendor.operatingHours && <MutedParagraph>{vendor.operatingHours}</MutedParagraph>}
           </div>
-          <GhostIconButton type="button">♡</GhostIconButton>
+          <GhostIconButton type="button" onClick={onToggleFavorite}>
+            {isFavorite ? '♥' : '♡'}
+          </GhostIconButton>
         </VendorTitleRow>
         <ChipRow>
           {vendor.amenities.map((item) => (

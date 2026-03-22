@@ -47,7 +47,9 @@ export default function ReservationDetailRoute() {
   return (
     <ReservationDetailScreen
       reservation={reservation}
-      onWriteReview={() => navigate(`/reservations/${reservation.id}/review`)}
+      onWriteReview={() => navigate(`/reservations/${reservation.id}/review`, {
+        state: { vendorId: reservation.vendorId, reservationId: reservation.id },
+      })}
       onCancel={handleCancel}
     />
   );

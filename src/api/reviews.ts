@@ -50,9 +50,9 @@ export async function createReview(
   const data = await apiFetch<ApiReview>('/reviews', {
     method: 'POST',
     body: JSON.stringify({
-      userId: TEMP_USER_ID,
-      vendorId,
-      reservationId,
+      user_id: TEMP_USER_ID,
+      vendor_id: vendorId,
+      reservation_id: reservationId,
       rating,
       content,
     }),

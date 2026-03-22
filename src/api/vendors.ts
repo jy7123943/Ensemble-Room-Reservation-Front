@@ -1,9 +1,6 @@
 import { apiFetch } from './client';
 import type { Room, TimeSlot, Vendor } from '../types';
 
-const DEFAULT_IMAGE =
-  'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80';
-
 // --- snake_case API 응답 타입 ---
 
 interface ApiVendor {
@@ -14,9 +11,12 @@ interface ApiVendor {
   business_number: string;
   status: string;
   amenities: string[];
-  operating_hours: Record<string, string>;
+  operating_hours?: Record<string, string>;
   owner_name: string;
   created_at: string;
+  rating?: number;
+  review_count?: number;
+  image_url?: string;
 }
 
 interface ApiRoom {
@@ -51,13 +51,14 @@ function toVendor(api: ApiVendor): Vendor {
   return {
     id: api.id,
     name: api.name,
-    rating: 0,
-    reviewCount: 0,
+    rating: api.rating ?? 0,
+    reviewCount: api.review_count ?? 0,
     distance: '',
     address: api.address,
     priceLabel: '',
     amenities: api.amenities ?? [],
-    imageUrl: DEFAULT_IMAGE,
+    imageUrl: api.image_url ?? '',
+    operatingHours: api.operating_hours ? Object.values(api.operating_hours).join(', ') : undefined,
   };
 }
 
