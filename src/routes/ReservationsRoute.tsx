@@ -6,7 +6,7 @@ import { ReservationsScreen } from '../screens/ReservationsScreen';
 import type { Reservation } from '../types';
 
 // TODO: 토스 로그인 연동 후 실제 사용자 ID로 교체
-const TEMP_USER_ID = 'REPLACE_WITH_REAL_USER_ID';
+const TEMP_USER_ID = import.meta.env.VITE_TEMP_USER_ID as string;
 
 export default function ReservationsRoute() {
   const navigate = useNavigate();

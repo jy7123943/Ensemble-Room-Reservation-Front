@@ -27,7 +27,7 @@ function toVendor(fav: ApiFavorite): Vendor {
 }
 
 // TODO: 토스 로그인 연동 후 실제 사용자 ID로 교체
-const TEMP_USER_ID = 'REPLACE_WITH_REAL_USER_ID';
+const TEMP_USER_ID = import.meta.env.VITE_TEMP_USER_ID as string;
 
 export async function fetchFavorites(): Promise<Vendor[]> {
   const data = await apiFetch<ApiFavorite[]>(`/favorites?userId=${TEMP_USER_ID}`);
@@ -37,14 +37,14 @@ export async function fetchFavorites(): Promise<Vendor[]> {
 export async function addFavorite(vendorId: string): Promise<void> {
   await apiFetch('/favorites', {
     method: 'POST',
-    body: JSON.stringify({ userId: TEMP_USER_ID, vendorId }),
+    body: JSON.stringify({ user_id: TEMP_USER_ID, vendor_id: vendorId }),
   });
 }
 
 export async function removeFavorite(vendorId: string): Promise<void> {
   await apiFetch('/favorites', {
     method: 'DELETE',
-    body: JSON.stringify({ userId: TEMP_USER_ID, vendorId }),
+    body: JSON.stringify({ user_id: TEMP_USER_ID, vendor_id: vendorId }),
   });
 }
 
