@@ -14,13 +14,29 @@ export default function MyPageRoute() {
     fetchUser(TEMP_USER_ID)
       .then(setUser)
       .catch(() => {
-        // API 실패 시 기본값
         setUser(null);
       })
       .finally(() => setLoading(false));
   }, []);
 
+  const handleMenuClick = (menu: string) => {
+    switch (menu) {
+      case 'edit-profile':
+        alert('내 정보 수정 기능은 준비 중입니다');
+        break;
+      case 'notifications':
+        alert('알림 설정 기능은 준비 중입니다');
+        break;
+      case 'payments':
+        alert('결제 내역 기능은 준비 중입니다');
+        break;
+      case 'support':
+        alert('고객센터 기능은 준비 중입니다');
+        break;
+    }
+  };
+
   if (loading) return <p style={{ padding: 20, textAlign: 'center' }}>로딩 중...</p>;
 
-  return <MyPageScreen user={user} />;
+  return <MyPageScreen user={user} onMenuClick={handleMenuClick} />;
 }

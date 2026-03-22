@@ -1,10 +1,26 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { vendors } from '../data';
+import { fetchFavorites } from '../api/favorites';
+import { vendors as mockVendors } from '../data';
 import { FavoritesScreen } from '../screens/FavoritesScreen';
+import type { Vendor } from '../types';
 
-// TODO: 백엔드 찜 목록 API 구현 후 API 연동 필요
 export default function FavoritesRoute() {
   const navigate = useNavigate();
+  const [vendors, setVendors] = useState<Vendor[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFavorites()
+      .then(setVendors)
+      .catch(() => {
+        // API 실패 시 목 데이터로 폴백
+        setVendors(mockVendors);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p style={{ padding: 20, textAlign: 'center' }}>로딩 중...</p>;
 
   return (
     <FavoritesScreen
