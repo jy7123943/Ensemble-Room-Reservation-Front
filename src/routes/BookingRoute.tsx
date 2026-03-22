@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate, useParams, useLocation } from 'react-router-dom';
-import { fetchRooms, fetchAvailability } from '../api/vendors';
+import { fetchRooms, fetchAvailability, fetchVendor } from '../api/vendors';
 import { BookingScreen } from '../screens/BookingScreen';
 import type { Room, TimeSlot } from '../types';
 
@@ -33,8 +33,20 @@ export default function BookingRoute() {
   const location = useLocation();
   const { vendorId, roomId } = useParams();
 
-  // vendorName을 location.state에서 가져오거나 기본값 사용
-  const vendorName = (location.state as { vendorName?: string })?.vendorName ?? '';
+  const [vendorName, setVendorName] = useState(
+    (location.state as { vendorName?: string })?.vendorName ?? ''
+  );
+
+  // vendorName이 없으면 (직접 URL 접근) API로 조회
+  useEffect(() => {
+    if (vendorName || !vendorId) return;
+    fetchVendor(vendorId)
+      .then((vendor) => setVendorName(vendor.name))
+      .catch(() => {
+        // 업체 정보 조회 실패 시 홈으로 이동
+        navigate('/', { replace: true });
+      });
+  }, [vendorId, vendorName, navigate]);
 
   const dates = useMemo(() => generateNext7Days(), []);
   const [selectedDate, setSelectedDate] = useState(dates[0].value);

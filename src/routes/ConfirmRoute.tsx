@@ -56,8 +56,8 @@ export default function ConfirmRoute() {
         },
       });
     } catch {
-      alert('예약에 실패했습니다. 다시 시도해주세요.');
       setIsLoading(false);
+      alert('예약에 실패했습니다. 다시 시도해주세요.');
     }
   };
 
