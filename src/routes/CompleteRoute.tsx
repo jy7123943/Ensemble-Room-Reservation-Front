@@ -1,17 +1,33 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CompleteScreen } from '../screens/CompleteScreen';
+
+interface CompleteState {
+  reservationId: string;
+  reservationNumber: string;
+  vendorName: string;
+  roomName: string;
+  dateLabel: string;
+  timeLabel: string;
+}
 
 export default function CompleteRoute() {
   const navigate = useNavigate();
   const location = useLocation();
+  const state = location.state as CompleteState | null;
 
-  // 결제 후 전달된 예약 ID (있으면 사용, 없으면 목록으로 이동)
-  const reservationId = (location.state as { reservationId?: string })?.reservationId;
+  if (!state) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <CompleteScreen
+      reservationNumber={state.reservationNumber}
+      vendorName={state.vendorName}
+      roomName={state.roomName}
+      dateLabel={state.dateLabel}
+      timeLabel={state.timeLabel}
       onViewReservation={() =>
-        navigate(reservationId ? `/reservations/${reservationId}` : '/reservations')
+        navigate(state.reservationId ? `/reservations/${state.reservationId}` : '/reservations')
       }
       onGoHome={() => navigate('/')}
     />

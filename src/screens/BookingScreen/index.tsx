@@ -6,10 +6,40 @@ import type { Room, TimeSlot } from '../../types';
 interface BookingScreenProps {
   room: Room;
   slots: TimeSlot[];
+  dates: { value: string; label: string }[];
+  selectedDate: string;
+  onDateChange: (date: string) => void;
+  selectedSlots: string[];
+  onSlotToggle: (startTime: string) => void;
+  hourlyPrice: number;
   onNext: () => void;
 }
 
-export function BookingScreen({ room, slots, onNext }: BookingScreenProps) {
+export function BookingScreen({
+  room,
+  slots,
+  dates,
+  selectedDate,
+  onDateChange,
+  selectedSlots,
+  onSlotToggle,
+  hourlyPrice,
+  onNext,
+}: BookingScreenProps) {
+  const sortedSelected = [...selectedSlots].sort();
+  const durationHours = selectedSlots.length;
+  const totalPrice = durationHours * hourlyPrice;
+
+  const timeRangeLabel =
+    sortedSelected.length > 0
+      ? (() => {
+          const first = sortedSelected[0];
+          const lastSlot = slots.find((s) => s.start === sortedSelected[sortedSelected.length - 1]);
+          const end = lastSlot?.end ?? '';
+          return `${first.slice(0, 5)} - ${end.slice(0, 5)}`;
+        })()
+      : '';
+
   return (
     <>
       <SectionCard>
@@ -28,29 +58,60 @@ export function BookingScreen({ room, slots, onNext }: BookingScreenProps) {
 
       <SectionCard title="날짜 선택">
         <ChipRow>
-          <Button size="small">3/15</Button>
-          <Button size="small" variant="weak">3/16</Button>
-          <Button size="small" variant="weak">3/17</Button>
+          {dates.map((d) => (
+            <Button
+              key={d.value}
+              size="small"
+              variant={d.value === selectedDate ? 'fill' : 'weak'}
+              onClick={() => onDateChange(d.value)}
+            >
+              {d.label}
+            </Button>
+          ))}
         </ChipRow>
       </SectionCard>
 
       <SectionCard title="시간 선택">
         <SlotGrid>
-          {slots.map((slot) => (
-            <SlotButton key={slot.label} type="button" available={slot.available}>
-              {slot.label}
-            </SlotButton>
-          ))}
+          {slots.map((slot) => {
+            const isSelected = selectedSlots.includes(slot.start);
+            return (
+              <SlotButton
+                key={slot.label}
+                type="button"
+                available={slot.available}
+                selected={isSelected}
+                disabled={!slot.available}
+                onClick={() => slot.available && onSlotToggle(slot.start)}
+              >
+                {slot.label}
+              </SlotButton>
+            );
+          })}
         </SlotGrid>
-        <ListRow
-          border="none"
-          horizontalPadding="small"
-          contents={<ListRow.Texts type="1RowTypeB" top="선택: 12:00 - 14:00" />}
-          right={<ListRow.Texts type="Right1RowTypeA" top="30,000원" />}
-        />
+        {selectedSlots.length > 0 && (
+          <ListRow
+            border="none"
+            horizontalPadding="small"
+            contents={
+              <ListRow.Texts
+                type="1RowTypeB"
+                top={`선택: ${timeRangeLabel} (${durationHours}시간)`}
+              />
+            }
+            right={
+              <ListRow.Texts
+                type="Right1RowTypeA"
+                top={`${totalPrice.toLocaleString('ko-KR')}원`}
+              />
+            }
+          />
+        )}
       </SectionCard>
 
-      <FixedBottomCTA onClick={onNext}>다음으로</FixedBottomCTA>
+      <FixedBottomCTA onClick={onNext} disabled={selectedSlots.length === 0}>
+        다음으로
+      </FixedBottomCTA>
     </>
   );
 }
@@ -68,13 +129,14 @@ const SlotGrid = styled.div({
   gap: '10px',
 });
 
-const SlotButton = styled.button<{ available: boolean }>(
-  ({ available }) => ({
+const SlotButton = styled.button<{ available: boolean; selected: boolean }>(
+  ({ available, selected }) => ({
     border: 0,
     borderRadius: '16px',
     padding: '14px 8px',
     fontWeight: 700,
-    background: !available ? '#e5e7eb' : '#e0f2fe',
-    color: !available ? '#94a3b8' : '#075985',
+    cursor: available ? 'pointer' : 'default',
+    background: !available ? '#e5e7eb' : selected ? '#0369a1' : '#e0f2fe',
+    color: !available ? '#94a3b8' : selected ? '#ffffff' : '#075985',
   }),
 );

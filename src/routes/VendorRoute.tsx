@@ -33,7 +33,9 @@ export default function VendorRoute() {
       vendor={vendor}
       rooms={rooms}
       onOpenBooking={(roomId: string) =>
-        navigate(`/vendors/${vendor.id}/rooms/${roomId}/book`)
+        navigate(`/vendors/${vendor.id}/rooms/${roomId}/book`, {
+          state: { vendorName: vendor.name },
+        })
       }
     />
   );

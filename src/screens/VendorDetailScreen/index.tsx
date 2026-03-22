@@ -23,7 +23,7 @@ export function VendorDetailScreen({
             <PageSectionTitle>{vendor.name}</PageSectionTitle>
             <MutedParagraph>★ {vendor.rating} ({vendor.reviewCount})</MutedParagraph>
             <MutedParagraph>{vendor.address}</MutedParagraph>
-            <MutedParagraph>09:00 - 23:00</MutedParagraph>
+            {vendor.operatingHours && <MutedParagraph>{vendor.operatingHours}</MutedParagraph>}
           </div>
           <GhostIconButton type="button">♡</GhostIconButton>
         </VendorTitleRow>

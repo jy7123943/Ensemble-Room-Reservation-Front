@@ -1,11 +1,21 @@
 import { Asset, Button, FixedBottomCTA, Result } from '@toss/tds-mobile';
 
 interface CompleteScreenProps {
+  reservationNumber: string;
+  vendorName: string;
+  roomName: string;
+  dateLabel: string;
+  timeLabel: string;
   onViewReservation: () => void;
   onGoHome: () => void;
 }
 
 export function CompleteScreen({
+  reservationNumber,
+  vendorName,
+  roomName,
+  dateLabel,
+  timeLabel,
   onViewReservation,
   onGoHome,
 }: CompleteScreenProps) {
@@ -14,7 +24,7 @@ export function CompleteScreen({
       <Result
         figure={<Asset.Text frameShape={{ width: 64, height: 64 }}>✓</Asset.Text>}
         title="예약이 완료되었어요"
-        description="예약번호: R-20260315-A7K2\n사운드박스 합주실 · A룸\n2026.03.15 12:00 - 14:00"
+        description={`예약번호: ${reservationNumber}\n${vendorName} · ${roomName}\n${dateLabel} ${timeLabel}`}
       />
       <FixedBottomCTA.Double
         leftButton={

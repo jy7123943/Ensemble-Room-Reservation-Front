@@ -10,6 +10,7 @@ export interface Vendor {
   priceLabel: string;
   amenities: string[];
   imageUrl: string;
+  operatingHours?: string;
 }
 
 export interface Room {

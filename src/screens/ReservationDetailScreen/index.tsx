@@ -6,11 +6,13 @@ import { SectionCard } from '../../components/SectionCard';
 interface ReservationDetailScreenProps {
   reservation: Reservation;
   onWriteReview: () => void;
+  onCancel: () => void;
 }
 
 export function ReservationDetailScreen({
   reservation,
   onWriteReview,
+  onCancel,
 }: ReservationDetailScreenProps) {
   return (
     <>
@@ -18,10 +20,10 @@ export function ReservationDetailScreen({
         <HeroImage src={reservation.imageUrl} alt={reservation.vendorName} />
         <StatusPillWrap>
           <Badge size="medium" variant="weak" color="blue">
-            {reservation.status === 'confirmed' ? '예약 확정' : '이용 완료'}
+            {reservation.status === 'confirmed' ? '예약 확정' : reservation.status === 'cancelled' ? '취소됨' : '이용 완료'}
           </Badge>
         </StatusPillWrap>
-        <ListRow border="none" horizontalPadding="small" contents={<ListRow.Texts type="1RowTypeB" top="예약번호" />} right={<ListRow.Texts type="Right1RowTypeA" top={reservation.id} />} />
+        <ListRow border="none" horizontalPadding="small" contents={<ListRow.Texts type="1RowTypeB" top="예약번호" />} right={<ListRow.Texts type="Right1RowTypeA" top={reservation.reservationNumber ?? reservation.id} />} />
         <ListRow border="none" horizontalPadding="small" contents={<ListRow.Texts type="1RowTypeB" top="업체" />} right={<ListRow.Texts type="Right1RowTypeA" top={reservation.vendorName} />} />
         <ListRow border="none" horizontalPadding="small" contents={<ListRow.Texts type="1RowTypeB" top="룸" />} right={<ListRow.Texts type="Right1RowTypeA" top={reservation.roomName} />} />
         <ListRow border="none" horizontalPadding="small" contents={<ListRow.Texts type="1RowTypeB" top="일시" />} right={<ListRow.Texts type="Right1RowTypeA" top={`${reservation.dateLabel} ${reservation.timeLabel}`} />} />
@@ -47,9 +49,13 @@ export function ReservationDetailScreen({
             <Button size="large" onClick={onWriteReview}>
               리뷰 작성
             </Button>
-          ) : (
-            <Button size="large">
+          ) : reservation.status === 'confirmed' ? (
+            <Button size="large" onClick={onCancel}>
               예약 취소
+            </Button>
+          ) : (
+            <Button size="large" disabled>
+              취소됨
             </Button>
           )
         }
