@@ -12,6 +12,8 @@ interface ApiReservation {
   user_id: string;
   room_id: string;
   vendor_id: string;
+  vendor_name: string;
+  room_name: string;
   date: string;
   start_time: string;
   end_time: string;
@@ -61,10 +63,9 @@ function toReservation(api: ApiReservation): Reservation {
     vendorId: api.vendor_id,
     roomId: api.room_id,
     status: statusToFrontend(api.status),
-    // 백엔드에 vendorName, roomName이 없으므로 기본값 사용
-    vendorName: '',
+    vendorName: api.vendor_name,
     imageUrl: DEFAULT_IMAGE,
-    roomName: '',
+    roomName: api.room_name,
     dateLabel: formatDate(api.date),
     timeLabel: formatTime(api.start_time, api.end_time),
     priceLabel: formatPrice(api.total_price),
@@ -101,6 +102,11 @@ export async function fetchUserReservations(userId: string): Promise<Reservation
     `/reservations?userId=${userId}`,
   );
   return data.content.map(toReservation);
+}
+
+export async function fetchReservation(id: string): Promise<Reservation> {
+  const api = await apiFetch<ApiReservation>(`/reservations/${id}`);
+  return toReservation(api);
 }
 
 export async function cancelReservation(
