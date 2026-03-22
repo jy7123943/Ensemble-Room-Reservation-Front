@@ -69,3 +69,9 @@ export async function fetchUserReviews(): Promise<Review[]> {
   const data = await apiFetch<ApiReview[]>(`/reviews/user/${TEMP_USER_ID}`);
   return data.map(toReview);
 }
+
+export async function deleteReview(reviewId: string): Promise<void> {
+  await apiFetch(`/reviews/${reviewId}?userId=${TEMP_USER_ID}`, {
+    method: 'DELETE',
+  });
+}

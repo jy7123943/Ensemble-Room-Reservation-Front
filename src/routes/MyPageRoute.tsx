@@ -29,6 +29,9 @@ export default function MyPageRoute() {
       case 'notifications':
         navigate('/mypage/notifications');
         break;
+      case 'reviews':
+        navigate('/mypage/reviews');
+        break;
       case 'payments':
         navigate('/mypage/payments');
         break;

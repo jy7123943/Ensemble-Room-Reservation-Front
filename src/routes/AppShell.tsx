@@ -75,6 +75,36 @@ const routeMeta: Array<{
     tab: "favorites",
   },
   {
+    pattern: "/mypage/edit-profile",
+    title: "내 정보 수정",
+    subtitle: "프로필 정보를 수정하세요.",
+    tab: "mypage",
+  },
+  {
+    pattern: "/mypage/notifications",
+    title: "알림 설정",
+    subtitle: "알림 수신 설정을 관리하세요.",
+    tab: "mypage",
+  },
+  {
+    pattern: "/mypage/reviews",
+    title: "내 리뷰",
+    subtitle: "작성한 리뷰를 확인하고 관리하세요.",
+    tab: "mypage",
+  },
+  {
+    pattern: "/mypage/payments",
+    title: "결제 내역",
+    subtitle: "결제 내역을 확인하세요.",
+    tab: "mypage",
+  },
+  {
+    pattern: "/mypage/support",
+    title: "고객센터",
+    subtitle: "문의사항이 있으시면 알려주세요.",
+    tab: "mypage",
+  },
+  {
     pattern: "/mypage",
     title: "마이페이지",
     subtitle: "개인 설정과 내 정보를 관리하세요.",

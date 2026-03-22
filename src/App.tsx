@@ -18,6 +18,7 @@ const EditProfileRoute = lazy(() => import('./routes/EditProfileRoute'));
 const NotificationSettingsRoute = lazy(() => import('./routes/NotificationSettingsRoute'));
 const PaymentHistoryRoute = lazy(() => import('./routes/PaymentHistoryRoute'));
 const SupportRoute = lazy(() => import('./routes/SupportRoute'));
+const MyReviewsRoute = lazy(() => import('./routes/MyReviewsRoute'));
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="mypage/edit-profile" element={<EditProfileRoute />} />
           <Route path="mypage/notifications" element={<NotificationSettingsRoute />} />
           <Route path="mypage/payments" element={<PaymentHistoryRoute />} />
+          <Route path="mypage/reviews" element={<MyReviewsRoute />} />
           <Route path="mypage/support" element={<SupportRoute />} />
           <Route path="admin" element={<AdminRoute />} />
         </Route>
