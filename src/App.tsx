@@ -14,6 +14,10 @@ const FavoritesRoute = lazy(() => import('./routes/FavoritesRoute'));
 const MyPageRoute = lazy(() => import('./routes/MyPageRoute'));
 const ReviewRoute = lazy(() => import('./routes/ReviewRoute'));
 const AdminRoute = lazy(() => import('./routes/AdminRoute'));
+const EditProfileRoute = lazy(() => import('./routes/EditProfileRoute'));
+const NotificationSettingsRoute = lazy(() => import('./routes/NotificationSettingsRoute'));
+const PaymentHistoryRoute = lazy(() => import('./routes/PaymentHistoryRoute'));
+const SupportRoute = lazy(() => import('./routes/SupportRoute'));
 
 export default function App() {
   return (
@@ -31,6 +35,10 @@ export default function App() {
           <Route path="reservations/:reservationId/review" element={<ReviewRoute />} />
           <Route path="favorites" element={<FavoritesRoute />} />
           <Route path="mypage" element={<MyPageRoute />} />
+          <Route path="mypage/edit-profile" element={<EditProfileRoute />} />
+          <Route path="mypage/notifications" element={<NotificationSettingsRoute />} />
+          <Route path="mypage/payments" element={<PaymentHistoryRoute />} />
+          <Route path="mypage/support" element={<SupportRoute />} />
           <Route path="admin" element={<AdminRoute />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
