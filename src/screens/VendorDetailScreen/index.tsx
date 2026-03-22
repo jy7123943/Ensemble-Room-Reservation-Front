@@ -6,7 +6,7 @@ import { SectionCard } from '../../components/SectionCard';
 interface VendorDetailScreenProps {
   vendor: Vendor;
   rooms: Room[];
-  onOpenBooking: () => void;
+  onOpenBooking: (roomId: string) => void;
 }
 
 export function VendorDetailScreen({
@@ -51,7 +51,7 @@ export function VendorDetailScreen({
                 />
               }
               right={
-                <Button size="small" onClick={onOpenBooking}>
+                <Button size="small" onClick={() => onOpenBooking(room.id)}>
                   예약
                 </Button>
               }

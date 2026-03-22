@@ -5,7 +5,7 @@ import { VendorCard } from '../../components/VendorCard';
 
 interface FavoritesScreenProps {
   vendors: Vendor[];
-  onOpenVendor: () => void;
+  onOpenVendor: (vendorId: string) => void;
 }
 
 export function FavoritesScreen({ vendors, onOpenVendor }: FavoritesScreenProps) {
@@ -13,7 +13,7 @@ export function FavoritesScreen({ vendors, onOpenVendor }: FavoritesScreenProps)
     <SectionCard title="찜한 업체">
       <Stack>
         {vendors.map((vendor) => (
-          <VendorCard key={vendor.id} vendor={vendor} onClick={onOpenVendor} />
+          <VendorCard key={vendor.id} vendor={vendor} onClick={() => onOpenVendor(vendor.id)} />
         ))}
       </Stack>
     </SectionCard>

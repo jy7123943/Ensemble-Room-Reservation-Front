@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import { Button, FixedBottomCTA, ListRow } from '@toss/tds-mobile';
 import { SectionCard } from '../../components/SectionCard';
-import type { Room } from '../../types';
+import type { Room, TimeSlot } from '../../types';
 
 interface BookingScreenProps {
   room: Room;
-  slots: Array<{ label: string; available: boolean; discounted?: boolean }>;
+  slots: TimeSlot[];
   onNext: () => void;
 }
 
@@ -37,7 +37,7 @@ export function BookingScreen({ room, slots, onNext }: BookingScreenProps) {
       <SectionCard title="시간 선택">
         <SlotGrid>
           {slots.map((slot) => (
-            <SlotButton key={slot.label} type="button" available={slot.available} discounted={slot.discounted}>
+            <SlotButton key={slot.label} type="button" available={slot.available}>
               {slot.label}
             </SlotButton>
           ))}
@@ -68,13 +68,13 @@ const SlotGrid = styled.div({
   gap: '10px',
 });
 
-const SlotButton = styled.button<{ available: boolean; discounted?: boolean }>(
-  ({ available, discounted }) => ({
+const SlotButton = styled.button<{ available: boolean }>(
+  ({ available }) => ({
     border: 0,
     borderRadius: '16px',
     padding: '14px 8px',
     fontWeight: 700,
-    background: !available ? '#e5e7eb' : discounted ? '#dcfce7' : '#e0f2fe',
-    color: !available ? '#94a3b8' : discounted ? '#15803d' : '#075985',
+    background: !available ? '#e5e7eb' : '#e0f2fe',
+    color: !available ? '#94a3b8' : '#075985',
   }),
 );

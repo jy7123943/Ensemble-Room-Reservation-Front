@@ -1,26 +1,39 @@
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { rooms, vendors } from '../data';
+import { fetchVendor, fetchRooms } from '../api/vendors';
 import { VendorDetailScreen } from '../screens/VendorDetailScreen';
+import type { Room, Vendor } from '../types';
 
 export default function VendorRoute() {
   const navigate = useNavigate();
   const { vendorId } = useParams();
 
-  const vendor = vendors.find((item) => item.id === vendorId);
+  const [vendor, setVendor] = useState<Vendor | null>(null);
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!vendor) {
-    return <Navigate to="/" replace />;
-  }
+  useEffect(() => {
+    if (!vendorId) return;
 
-  const vendorRooms = rooms.filter((room) => room.vendorId === vendor.id);
-  const firstRoom = vendorRooms[0];
+    Promise.all([fetchVendor(vendorId), fetchRooms(vendorId)])
+      .then(([v, r]) => {
+        setVendor(v);
+        setRooms(r);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, [vendorId]);
+
+  if (loading) return <p style={{ padding: 20, textAlign: 'center' }}>로딩 중...</p>;
+  if (error || !vendor) return <Navigate to="/" replace />;
 
   return (
     <VendorDetailScreen
       vendor={vendor}
-      rooms={vendorRooms}
-      onOpenBooking={() =>
-        navigate(`/vendors/${vendor.id}/rooms/${firstRoom.id}/book`)
+      rooms={rooms}
+      onOpenBooking={(roomId: string) =>
+        navigate(`/vendors/${vendor.id}/rooms/${roomId}/book`)
       }
     />
   );

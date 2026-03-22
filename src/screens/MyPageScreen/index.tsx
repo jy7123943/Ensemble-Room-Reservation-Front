@@ -1,8 +1,17 @@
 import styled from '@emotion/styled';
 import { ListRow } from '@toss/tds-mobile';
 import { SectionCard } from '../../components/SectionCard';
+import type { User } from '../../api/users';
 
-export function MyPageScreen() {
+interface MyPageScreenProps {
+  user: User | null;
+}
+
+export function MyPageScreen({ user }: MyPageScreenProps) {
+  const nickname = user?.nickname ?? '사용자';
+  const phone = user?.phone ?? '';
+  const initial = nickname.charAt(0).toUpperCase();
+
   return (
     <>
       <SectionCard>
@@ -10,14 +19,14 @@ export function MyPageScreen() {
           border="none"
           left={
             <ListRow.AssetText shape="squircle" size="medium">
-              J
+              {initial}
             </ListRow.AssetText>
           }
           contents={
             <ListRow.Texts
               type="2RowTypeA"
-              top="주연"
-              bottom="010-1234-5678"
+              top={nickname}
+              bottom={phone}
             />
           }
         />

@@ -21,9 +21,20 @@ export interface Room {
   equipment: string[];
 }
 
+export interface TimeSlot {
+  start: string;
+  end: string;
+  available: boolean;
+  price: number;
+  /** 화면 표시용 (e.g. "09:00") */
+  label: string;
+}
+
 export interface Reservation {
   id: string;
+  reservationNumber?: string;
   vendorId: string;
+  roomId?: string;
   status: 'confirmed' | 'completed' | 'cancelled';
   vendorName: string;
   imageUrl: string;
@@ -31,4 +42,11 @@ export interface Reservation {
   dateLabel: string;
   timeLabel: string;
   priceLabel: string;
+  /** API 원본 필드 (선택적) */
+  date?: string;
+  startTime?: string;
+  endTime?: string;
+  durationHours?: number;
+  totalPrice?: number;
+  userMemo?: string;
 }
