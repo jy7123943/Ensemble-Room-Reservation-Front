@@ -44,14 +44,20 @@ export function MyPageScreen({ user, onMenuClick }: MyPageScreenProps) {
           <ListRow
             border="none"
             withArrow
-            onClick={() => onMenuClick('notifications')}
-            contents={<ListRow.Texts type="1RowTypeA" top="알림 설정" />}
+            onClick={() => onMenuClick('payments')}
+            contents={<ListRow.Texts type="1RowTypeA" top="결제 내역" />}
           />
           <ListRow
             border="none"
             withArrow
-            onClick={() => onMenuClick('payments')}
-            contents={<ListRow.Texts type="1RowTypeA" top="결제 내역" />}
+            onClick={() => onMenuClick('reviews')}
+            contents={<ListRow.Texts type="1RowTypeA" top="내 리뷰" />}
+          />
+          <ListRow
+            border="none"
+            withArrow
+            onClick={() => onMenuClick('notifications')}
+            contents={<ListRow.Texts type="1RowTypeA" top="알림 설정" />}
           />
           <ListRow
             border="none"

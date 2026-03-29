@@ -50,6 +50,7 @@ export function ConfirmScreen({
       </SectionCard>
 
       <FixedBottomCTA onClick={onPay} disabled={isLoading}>
+        {/* TODO: 토스페이 결제 연동 후 실제 결제 플로우로 교체 */}
         {isLoading ? '결제 처리 중...' : '토스페이 결제'}
       </FixedBottomCTA>
     </>

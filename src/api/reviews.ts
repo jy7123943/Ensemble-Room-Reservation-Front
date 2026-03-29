@@ -39,7 +39,7 @@ function toReview(api: ApiReview): Review {
 }
 
 // TODO: 토스 로그인 연동 후 실제 사용자 ID로 교체
-const TEMP_USER_ID = 'REPLACE_WITH_REAL_USER_ID';
+const TEMP_USER_ID = import.meta.env.VITE_TEMP_USER_ID as string;
 
 export async function createReview(
   vendorId: string,
@@ -68,4 +68,10 @@ export async function fetchVendorReviews(vendorId: string): Promise<Review[]> {
 export async function fetchUserReviews(): Promise<Review[]> {
   const data = await apiFetch<ApiReview[]>(`/reviews/user/${TEMP_USER_ID}`);
   return data.map(toReview);
+}
+
+export async function deleteReview(reviewId: string): Promise<void> {
+  await apiFetch(`/reviews/${reviewId}?userId=${TEMP_USER_ID}`, {
+    method: 'DELETE',
+  });
 }

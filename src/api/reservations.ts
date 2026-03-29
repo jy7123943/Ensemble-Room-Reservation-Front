@@ -21,6 +21,7 @@ interface ApiReservation {
   total_price: number;
   status: string;
   user_memo: string;
+  has_review: boolean;
 }
 
 interface PaginatedResponse<T> {
@@ -76,6 +77,7 @@ function toReservation(api: ApiReservation): Reservation {
     durationHours: api.duration_hours,
     totalPrice: api.total_price,
     userMemo: api.user_memo,
+    hasReview: api.has_review ?? false,
   };
 }
 

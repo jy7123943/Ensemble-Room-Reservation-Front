@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchUser } from '../api/users';
 import type { User } from '../api/users';
 import { MyPageScreen } from '../screens/MyPageScreen';
 
 // TODO: 토스 로그인 연동 후 실제 사용자 ID로 교체
-const TEMP_USER_ID = 'REPLACE_WITH_REAL_USER_ID';
+const TEMP_USER_ID = import.meta.env.VITE_TEMP_USER_ID as string;
 
 export default function MyPageRoute() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,16 +24,19 @@ export default function MyPageRoute() {
   const handleMenuClick = (menu: string) => {
     switch (menu) {
       case 'edit-profile':
-        alert('내 정보 수정 기능은 준비 중입니다');
+        navigate('/mypage/edit-profile');
         break;
       case 'notifications':
-        alert('알림 설정 기능은 준비 중입니다');
+        navigate('/mypage/notifications');
+        break;
+      case 'reviews':
+        navigate('/mypage/reviews');
         break;
       case 'payments':
-        alert('결제 내역 기능은 준비 중입니다');
+        navigate('/mypage/payments');
         break;
       case 'support':
-        alert('고객센터 기능은 준비 중입니다');
+        navigate('/mypage/support');
         break;
     }
   };
